@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {BounceLoader} from 'react-spinners';
 import {setLoadingStatus} from '../../store/action';
 import React, {useState} from 'react';
+import {fetchSearchResults} from '../../services/api-actions';
 
 function SearchForm() {
   const isLoading = useAppSelector(state => state.isLoading);
@@ -11,9 +12,11 @@ function SearchForm() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isSubmitButtonActive, setSubmitButtonActive] = useState(false);
 
-  const submitButtonHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+  const submitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(setLoadingStatus(true));
+    console.log(event.target)
+    dispatch(fetchSearchResults({email: "jim@gmail.com", number: "221122"}))
   }
 
   const changePhoneHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +41,10 @@ function SearchForm() {
 
   return(
       <>
-        <form action="" className="search-form">
+        <form action="" className="search-form" onSubmit={submitButtonHandler}>
           <Input label={"Email"} id={"email"} name={"email"} type={"text"} placeholder={"mail@example.com"} required={true} onBlurHandler={inputEmailHandler} />
           <Input label={"Phone number"} id={"phone"} name={"phone"} type={"text"} onChangeHandler={changePhoneHandler} value={phoneNumber} />
-          <Input id={"submit"} name={"submit"} type={"submit"} value={"Send"} onClickHandler={submitButtonHandler} disabled={isSubmitButtonActive}/>
+          <Input id={"submit"} name={"submit"} type={"submit"} value={"Send"} disabled={isSubmitButtonActive}/>
           <BounceLoader color="#2731e5" loading={isLoading} />
         </form>
 
