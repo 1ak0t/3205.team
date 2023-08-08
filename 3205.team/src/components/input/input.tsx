@@ -1,11 +1,13 @@
 import './input.scss'
 import React from 'react';
+import {Path} from 'react-hook-form';
+import {SearchDataFormHook} from '../../types/search-data';
 
 type InputProps = {
   label?: string,
   value?: string,
   id: string,
-  name: string,
+  name: Path<SearchDataFormHook>,
   type: string,
   placeholder?: string,
   required?: boolean,
@@ -16,6 +18,7 @@ type InputProps = {
 }
 
 function Input({id,name,type, placeholder, value, label, required, disabled, onClickHandler, onChangeHandler, onBlurHandler}: InputProps) {
+
   return (
       <>
         <label htmlFor={id}>
