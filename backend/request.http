@@ -1,0 +1,11 @@
+GET http://127.0.0.1:3500/
+Content-Type: application/json
+
+###
+POST http://127.0.0.1:3500/
+Content-Type: application/json
+
+{
+  "email": "jill@gmail.com",
+  "number": "822287"
+}
